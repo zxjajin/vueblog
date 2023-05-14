@@ -3,6 +3,7 @@ package com.ajin.shiro;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author ajin
@@ -17,4 +18,10 @@ public class AccountProfile implements Serializable {
     private String avatar;
 
     private String email;
+
+    private Integer status;
+
+    private LocalDateTime created;
+
+    private LocalDateTime lastLogin;
 }

@@ -8,6 +8,7 @@ import com.ajin.service.BlogService;
 import com.ajin.util.ShiroUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.BeanUtils;
@@ -38,6 +39,17 @@ public class BlogController {
         Page page = new Page(currentPage,5);
         IPage pageDate = blogService.page(page, new QueryWrapper<Blog>().orderByDesc("created"));
         return Result.succ(pageDate);
+    }
+
+    @GetMapping("/blogs/search")
+    public Result list(@RequestParam(defaultValue = "1") Integer currentPage,@RequestParam String search){
+       search = search.trim();
+        if(StringUtils.isNotEmpty(search)){
+        Page page = new Page(currentPage, 5);
+        IPage pageDate = blogService.page(page, new QueryWrapper<Blog>().like("title", search).or().like("description", search).or().like("content", search));
+        return Result.succ(pageDate);
+        }
+        return list(1);
     }
 
     @GetMapping("/blog/{id}")
