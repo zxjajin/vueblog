@@ -1,0 +1,25 @@
+spring:
+  redis:
+    host: 8.138.58.49
+    port: 6379
+    password: 123456
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vueblog
+    username: root
+    password: 123456
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+server:
+  port: 8000
+shiro-redis:
+  enabled: true
+  redis-manager:
+    host: 8.138.58.49:6379
+    password: 123456
+ajin:
+  jwt:
+    secret: f4e2e52034348f867cde581c0f9eb5
+    # token有效时长：7天，单位秒
+    expire: 604800
+    header: Authorization
