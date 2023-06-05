@@ -33,6 +33,11 @@ public class BlogController {
     @Autowired
     BlogService blogService;
 
+    /**
+     * 查询博客文章
+     * @param currentPage 当前页数默认值为1
+     * @return 返回json数据给前端
+     */
     @GetMapping("/blogs")
     public Result list(@RequestParam(defaultValue = "1") Integer currentPage){
 
@@ -41,6 +46,12 @@ public class BlogController {
         return Result.succ(pageDate);
     }
 
+    /**
+     * 根据search进行模糊查询
+     * @param currentPage 当前页数默认值为1
+     * @param search 要查询内容
+     * @return
+     */
     @GetMapping("/blogs/search")
     public Result list(@RequestParam(defaultValue = "1") Integer currentPage,@RequestParam String search){
        search = search.trim();
@@ -52,6 +63,11 @@ public class BlogController {
         return list(1);
     }
 
+    /**
+     * 根据id查询指定文章信息
+     * @param id
+     * @return
+     */
     @GetMapping("/blog/{id}")
     public Result detail(@PathVariable(name = "id") Long id){
         Blog blog = blogService.getById(id);
@@ -59,6 +75,12 @@ public class BlogController {
         return Result.succ(blog);
     }
 
+    /**
+     *  @RequiresAuthentication进行身份验证后才能操作
+     *  修改文章信息
+     * @param blog 修改后的数据
+     * @return
+     */
     @RequiresAuthentication
     @PostMapping("blog/edit")
     public Result edit(@Validated @RequestBody Blog blog){

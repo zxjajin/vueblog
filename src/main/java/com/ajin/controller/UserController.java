@@ -34,14 +34,20 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-    @RequiresAuthentication
-    @RequestMapping("/index")
-    public Result index(){
-        User user = userService.getById(2);
-        return Result.succ(200,"操作成功",user);
+//    @RequiresAuthentication
+//    @RequestMapping("/index")
+//    public Result index(){
+//        User user = userService.getById(2);
+//        return Result.succ(200,"操作成功",user);
+//    }
+
+    @GetMapping("/{id}")
+    public Result getUser(@PathVariable(name = "id") Long id){
+        User user = userService.getById(id);
+        return Result.succ(user);
     }
 
-    @GetMapping("index")
+    @GetMapping("/index")
     public Result list(){
         List<User> list = userService.list();
         ArrayList<AccountProfile> userList = new ArrayList<>();

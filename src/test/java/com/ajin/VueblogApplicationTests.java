@@ -10,8 +10,8 @@ import javax.sql.DataSource;
 @Slf4j
 @SpringBootTest
 class VueblogApplicationTests {
-//    @Autowired
-//    DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
     @Test
     void contextLoads() {
         Jedis jedis = new Jedis("8.138.58.49",6379);
@@ -23,5 +23,10 @@ class VueblogApplicationTests {
         jedis.set("k1","jedis");
         log.info("k1 value:{}",jedis.get("k1"));
     }
+    @Test
+    void test1(){
+        System.out.println(dataSource.getClass());
+    }
+
 
 }
