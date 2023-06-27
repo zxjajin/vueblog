@@ -7,6 +7,7 @@ import com.ajin.entity.Blog;
 import com.ajin.service.BlogService;
 import com.ajin.util.ShiroUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -44,6 +45,18 @@ public class BlogController {
         Page page = new Page(currentPage,5);
         IPage pageDate = blogService.page(page, new QueryWrapper<Blog>().orderByDesc("created"));
         return Result.succ(pageDate);
+    }
+
+    /**
+     * 浏览量增加
+     */
+    @PostMapping("/blogs/{id}")
+    public Result frequency(@PathVariable("id") Long id){
+        Blog blog = blogService.getById(id);
+        blog.setFrequency(blog.getFrequency()+1);
+        boolean b = blogService.updateById(blog);
+        Assert.isTrue(b,"浏览量更新失败");
+        return Result.succ("浏览量更新成功");
     }
 
     /**

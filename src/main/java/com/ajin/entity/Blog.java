@@ -46,4 +46,7 @@ public class Blog implements Serializable {
     private Integer status;
 
 
+    private Long frequency;//浏览次数
+
+
 }
