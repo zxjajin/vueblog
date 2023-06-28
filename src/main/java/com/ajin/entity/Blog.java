@@ -32,6 +32,8 @@ public class Blog implements Serializable {
 
     private Long userId;
 
+    private Long classifyId;
+
     @NotBlank(message = "标题不能为空")
     private String title;
 

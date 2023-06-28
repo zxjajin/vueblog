@@ -124,7 +124,8 @@ public class UserController {
 
     public static String savaFileByNio(FileInputStream fis, String fileName) {
         // 这个路径最后是在: 你的项目路径/FileSpace  也就是和src同级
-        String fileSpace = System.getProperty("user.dir") + File.separator + "FileSpace";
+//        String fileSpace = System.getProperty("user.dir") + File.separator + "FileSpace";
+        String fileSpace = "/opt" + File.separator + "static";
         String path = fileSpace + File.separator + fileName;
         // 判断父文件夹是否存在
         File file = new File(path);
