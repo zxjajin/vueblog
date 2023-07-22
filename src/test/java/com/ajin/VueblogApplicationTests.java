@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import redis.clients.jedis.Jedis;
 
 import javax.sql.DataSource;
+import java.util.List;
+
 @Slf4j
 @SpringBootTest
 class VueblogApplicationTests {
@@ -25,7 +27,16 @@ class VueblogApplicationTests {
     }
     @Test
     void test1(){
-        System.out.println(dataSource.getClass());
+//        System.out.println(dataSource.getClass());
+        int[] ints = new int[]{76,82,83,84,84,84,85,85,85,87,89,90,91,92,93};
+        int sum =0;
+        for(int i = 0;i<ints.length;i++){
+
+            sum += ints[i];
+        }
+        int average = sum/ints.length;
+        System.out.println("总分："+sum+"平均分:"+average+" "+ints.length+"科");
+
     }
 
 

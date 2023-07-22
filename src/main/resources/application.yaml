@@ -1,8 +1,8 @@
 spring:
   servlet:
     multipart:
-      max-file-size: 50MB
-      max-request-size: 100MB
+      max-file-size: 1000MB
+      max-request-size: 1000MB
   redis:
     host: 8.138.58.49
     port: 6379
@@ -12,6 +12,9 @@ spring:
     url: jdbc:mysql://localhost:3306/vueblog
     username: root
     password: 123456
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
 server:
@@ -27,3 +30,6 @@ ajin:
     # token有效时长：7天，单位秒
     expire: 604800
     header: Authorization
+#debug: true
+#swagger:
+#  enabled: true

@@ -2,6 +2,7 @@ package com.ajin.controller;
 
 
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.digest.MD5;
 import com.ajin.common.lang.Result;
 import com.ajin.entity.User;
 import com.ajin.service.UserService;
@@ -13,6 +14,7 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -99,6 +101,7 @@ public class UserController {
         System.out.println(user);
         Long id = user.getId();
         if(id!=null && id!=0){
+            user.setPassword(SecureUtil.md5(user.getPassword()));
             boolean flag = userService.updateById(user);
             Assert.isTrue(flag,"修改失败");
             if(flag){
@@ -124,8 +127,8 @@ public class UserController {
 
     public static String savaFileByNio(FileInputStream fis, String fileName) {
         // 这个路径最后是在: 你的项目路径/FileSpace  也就是和src同级
-//        String fileSpace = System.getProperty("user.dir") + File.separator + "FileSpace";
-        String fileSpace = "/opt" + File.separator + "static";
+        String fileSpace = System.getProperty("user.dir") + File.separator + "FileSpace";
+//        String fileSpace = "/opt" + File.separator + "static";
         String path = fileSpace + File.separator + fileName;
         // 判断父文件夹是否存在
         File file = new File(path);
